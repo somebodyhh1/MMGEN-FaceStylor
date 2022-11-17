@@ -15,7 +15,6 @@ from mmgen.datasets import build_dataset
 from mmgen.models import build_model
 from mmgen.utils import collect_env, get_root_logger
 
-import agilegan  # isort:skip  # noqa
 
 
 def parse_args():
