@@ -205,7 +205,7 @@ class PSPEncoderDecoder(nn.Module):
 
         self.train()
         optimizer.zero_grad()
-
+        torch.cuda.empty_cache()
         y_hat = self(x, return_latents=False)
 
         loss, loss_dict = self.calc_loss(x, y, y_hat)
@@ -231,3 +231,4 @@ class PSPEncoderDecoder(nn.Module):
         if hasattr(self, 'iteration'):
             self.iteration += 1
         return outputs
+

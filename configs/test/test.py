@@ -1,26 +1,61 @@
-encoder_ckpt_path = 'work_dirs/pre-trained/agile_encoder_ffhq1024x1024_lr_1e-4_500kiter_20211201_112111-fb1312dc.pth'  # noqa
+_base_ = [
+    '../_base_/models/agile_transfer_256x256.py', '../_base_/datasets/unconditional_imgs_flip_256x256.py',
+    '../_base_/default_runtime.py'
+]
 
-stylegan_weights = 'work_dirs/pre-trained/agile_transfer_metfaces-oil1024x1024_zplus_lpips0.5_freezeD5_ada_bs4x2_lr_1e-4_1600iter_20211104_134350-2b99cb9b.pth'  # noqa
+# define dataset
+# you must set `samples_per_gpu`
+# `samples_per_gpu` and `imgs_root` need to be set.
+imgs_root = 'data/1_Aya_and_the_Demon_Girl_compress'
+data = dict(samples_per_gpu=2,
+            workers_per_gpu=2,
+            train=dict(dataset=dict(imgs_root=imgs_root)),
+            val=dict(imgs_root=imgs_root))
 
-model = dict(type='PSPEncoderDecoder',
-             encoder=dict(type='VAEStyleEncoder',
-                          num_layers=50,
-                          pretrained=dict(ckpt_path=encoder_ckpt_path,
-                                          prefix='encoder',
-                                          strict=False)),
-             decoder=dict(type='SwapStyleGANv2Generator',
-                          out_size=1024,
-                          style_channels=512,
-                          num_mlps=8,
-                          pretrained=dict(ckpt_path=stylegan_weights,
-                                          prefix='generator_ema')),
-             pool_size=(1024, 1024),
-             id_lambda=0.0,
-             lpips_lambda=0.0,
-             id_ckpt=None,
-             kl_loss=None,
-             train_cfg=None,
-             test_cfg=None)
+aug_kwargs = {
+    'xflip': 1,
+    'rotate90': 1,
+    'xint': 1,
+    'scale': 1,
+    'rotate': 1,
+    'aniso': 1,
+    'xfrac': 1,
+    'brightness': 1,
+    'contrast': 1,
+    'lumaflip': 1,
+    'hue': 1,
+    'saturation': 1
+}
 
-train_cfg = None
-test_cfg = None
+model = dict(
+    lpips_lambda=0.5,
+    freezeD=5,
+    discriminator=dict(data_aug=dict(type='ADAAug', aug_pipeline=aug_kwargs)))
+
+# adjust running config
+lr_config = None
+checkpoint_config = dict(interval=400, by_epoch=False, max_keep_ckpts=20)
+custom_hooks = [
+    dict(type='VisualizeUnconditionalSamples',
+         output_dir='training_samples',
+         interval=100),
+    dict(type='ExponentialMovingAverageHook',
+         module_keys=('generator_ema', ),
+         interval=1,
+         start_iter=1,
+         interp_cfg=dict(momentum=0.999),
+         priority='VERY_HIGH')
+]
+log_config = dict(interval=100, hooks=[dict(type='TextLoggerHook')])
+# 30000 images in celeba-hq
+total_iters = 16000
+
+# use ddp wrapper for faster training
+use_ddp_wrapper = True
+find_unused_parameters = True
+
+runner = dict(
+    type='DynamicIterBasedRunner',
+    is_dynamic_ddp=False,  # Note that this flag should be False.
+    pass_training_status=True)
+

@@ -6,7 +6,7 @@ _base_ = [
 # define dataset
 # you must set `samples_per_gpu`
 # `samples_per_gpu` and `imgs_root` need to be set.
-imgs_root = 'data/cartoon_compress'
+imgs_root = 'data/frozen'
 data = dict(samples_per_gpu=2,
             workers_per_gpu=2,
             train=dict(dataset=dict(imgs_root=imgs_root)),
@@ -48,7 +48,7 @@ custom_hooks = [
 ]
 log_config = dict(interval=100, hooks=[dict(type='TextLoggerHook')])
 # 30000 images in celeba-hq
-total_iters = 1600
+total_iters = 16000
 
 # use ddp wrapper for faster training
 use_ddp_wrapper = True
@@ -58,3 +58,4 @@ runner = dict(
     type='DynamicIterBasedRunner',
     is_dynamic_ddp=False,  # Note that this flag should be False.
     pass_training_status=True)
+resume_from='work_dirs/experiments/test_frozen/ckpt/test_frozen/latest.pth'

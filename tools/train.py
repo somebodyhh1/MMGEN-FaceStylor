@@ -14,7 +14,7 @@ from mmgen.apis import set_random_seed, train_model
 from mmgen.datasets import build_dataset
 from mmgen.models import build_model
 from mmgen.utils import collect_env, get_root_logger
-
+from agilegan.encoder import PSPEncoderDecoder
 
 
 def parse_args():
@@ -30,11 +30,13 @@ def parse_args():
     group_gpus = parser.add_mutually_exclusive_group()
     group_gpus.add_argument('--gpus',
                             type=int,
+                            default=1,
                             help='number of gpus to use '
                             '(only applicable to non-distributed training)')
     group_gpus.add_argument('--gpu-ids',
                             type=int,
                             nargs='+',
+                            default=[3],
                             help='ids of gpus to use '
                             '(only applicable to non-distributed training)')
     parser.add_argument('--seed', type=int, default=2021, help='random seed')
@@ -61,8 +63,9 @@ def parse_args():
 
 
 def main():
+    
     args = parse_args()
-
+    print("args==",args)
     cfg = Config.fromfile(args.config)
     if args.cfg_options is not None:
         cfg.merge_from_dict(args.cfg_options)
@@ -98,8 +101,10 @@ def main():
         # re-set gpu_ids with distributed training mode
         _, world_size = get_dist_info()
         cfg.gpu_ids = range(world_size)
-
+    
     # create work_dir
+    cfg.gpu_ids=range(2,3)
+    print("cfg.gpu_ids==",cfg.gpu_ids)
     mmcv.mkdir_or_exist(osp.abspath(cfg.work_dir))
     # dump config
     cfg.dump(osp.join(cfg.work_dir, osp.basename(args.config)))
@@ -131,11 +136,11 @@ def main():
     cfg.seed = args.seed
     meta['seed'] = args.seed
     meta['exp_name'] = osp.basename(args.config)
-
+    print("cfg.train_cfg==",cfg.train_cfg)
+    print("cfg.test_cfg==",cfg.test_cfg)
     model = build_model(cfg.model,
                         train_cfg=cfg.train_cfg,
                         test_cfg=cfg.test_cfg)
-
     datasets = [build_dataset(cfg.data.train)]
     if len(cfg.workflow) == 2:
         val_dataset = copy.deepcopy(cfg.data.val)
@@ -146,7 +151,7 @@ def main():
         # checkpoints as meta data
         cfg.checkpoint_config.meta = dict(mmgen_version=__version__ +
                                           get_git_hash()[:7])
-
+    torch.cuda.empty_cache()
     train_model(model,
                 datasets,
                 cfg,

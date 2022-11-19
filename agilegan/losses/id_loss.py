@@ -3,8 +3,6 @@ from mmgen.models.builder import MODULES
 from torch import nn
 
 from ..architectures.encoders.model_irse import Backbone
-
-
 @MODULES.register_module()
 class IDLoss(nn.Module):
     def __init__(self, model_path=None):

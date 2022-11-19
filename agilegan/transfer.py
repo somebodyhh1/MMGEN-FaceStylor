@@ -304,7 +304,7 @@ class PSPTransfer(StaticUnconditionalGAN):
         # If you adopt ddp, this batch size is local batch size for each GPU.
         # If you adopt dp, this batch size is the global batch size as usual.
         batch_size = real_imgs.shape[0]
-
+        #print("batch size==",batch_size)
         # get running status
         if running_status is not None:
             curr_iter = running_status['iteration']
@@ -361,8 +361,9 @@ class PSPTransfer(StaticUnconditionalGAN):
                                 loss_id=0) as scaled_loss_disc:
                 scaled_loss_disc.backward()
         else:
+            #print("loss_disc==",loss_disc)
             loss_disc.backward()
-
+            torch.cuda.empty_cache()
         if loss_scaler:
             loss_scaler.unscale_(optimizer['discriminator'])
             # note that we do not contain clip_grad procedure
@@ -441,8 +442,11 @@ class PSPTransfer(StaticUnconditionalGAN):
         if hasattr(self.discriminator.module,
                    'with_ada') and self.discriminator.module.with_ada:
             self.discriminator.module.ada_aug.log_buffer[0] += 1
+            #刘敬宇 修改
+            #print(type(disc_pred_real))
+            #print(disc_pred_real)
             self.discriminator.module.ada_aug.log_buffer[
-                1] += disc_pred_real.sign()
+                1] += disc_pred_real.sign()[0][0]
             self.discriminator.module.ada_aug.update(iteration=curr_iter,
                                                      num_batches=batch_size)
             log_vars_disc['ada_prob'] = (
