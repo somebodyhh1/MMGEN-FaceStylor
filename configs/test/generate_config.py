@@ -2,7 +2,7 @@
 
 encoder_ckpt_path = 'work_dirs/pre-trained/agile_encoder_ffhq1024x1024_lr_1e-4_500kiter_20211201_112111-fb1312dc.pth'  # noqa
 
-stylegan_weights = 'work_dirs/experiments/met_oil/ckpt/met_oil/latest.pth'  # noqa
+stylegan_weights = 'work_dirs/experiments/res/1_Filisi/ckpt/1_Filisi/iter_600.pth'  # noqa
 
 model = dict(type='PSPEncoderDecoder',
              encoder=dict(type='VAEStyleEncoder',
@@ -11,12 +11,12 @@ model = dict(type='PSPEncoderDecoder',
                                           prefix='encoder',
                                           strict=False)),
              decoder=dict(type='SwapStyleGANv2Generator',
-                          out_size=256,
+                          out_size=1024,
                           style_channels=512,
                           num_mlps=8,
                           pretrained=dict(ckpt_path=stylegan_weights,
                                           prefix='generator_ema')),
-             pool_size=(256, 256),
+             pool_size=(1024, 1024),
              id_lambda=0.0,
              lpips_lambda=0.0,
              id_ckpt=None,

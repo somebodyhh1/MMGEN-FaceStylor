@@ -1,0 +1,326 @@
+/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/launch.py:178: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/mmcv/__init__.py:20: UserWarning: On January 1, 2023, MMCV will release v2.0.0, in which it will remove components related to the training process and add a data transformation module. In addition, it will rename the package names mmcv to mmcv-lite and mmcv-full to mmcv. See https://github.com/open-mmlab/mmcv/blob/master/docs/en/compatibility.md for more details.
+  warnings.warn(
+args== Namespace(config='configs/test/configs/10_Forest_Odds.py', work_dir='./work_dirs/experiments/res/10_Forest_Odds', resume_from=None, no_validate=False, gpus=1, gpu_ids=None, seed=2021, deterministic=False, cfg_options=None, launcher='pytorch', local_rank=0)
+cfg.gpu_ids== range(2, 3)
+2022-11-24 23:20:51,601 - mmgen - INFO - Environment info:
+------------------------------------------------------------
+sys.platform: linux
+Python: 3.9.13 | packaged by conda-forge | (main, May 27 2022, 16:58:50) [GCC 10.3.0]
+CUDA available: True
+CUDA_HOME: /usr/local/cuda-11.2
+NVCC: Build cuda_11.2.r11.2/compiler.29618528_0
+GPU 0,1,2,3: NVIDIA GeForce RTX 3090
+GCC: gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+PyTorch: 1.10.0
+PyTorch compiling details: PyTorch built with:
+  - GCC 7.3
+  - C++ Version: 201402
+  - Intel(R) oneAPI Math Kernel Library Version 2021.4-Product Build 20210904 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.2.3 (Git Hash 7336ca9f055cf1bfa13efb658fe15dc9b41f0740)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX512
+  - CUDA Runtime 11.3
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 8.2
+  - Magma 2.5.2
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=11.3, CUDNN_VERSION=8.2.0, CXX_COMPILER=/opt/rh/devtoolset-7/root/usr/bin/c++, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_KINETO -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DEDGE_PROFILER_USE_KINETO -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-result -Wno-unused-local-typedefs -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.10.0, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, 
+
+TorchVision: 0.11.0
+OpenCV: 4.6.0
+MMCV: 1.7.0
+MMGen: 0.7.2+37fe107
+MMCV Compiler: GCC 9.3
+MMCV CUDA Compiler: 11.3
+------------------------------------------------------------
+
+2022-11-24 23:20:52,655 - mmgen - INFO - Distributed training: True
+2022-11-24 23:20:53,676 - mmgen - INFO - Config:
+stylegan_weights = 'https://download.openmmlab.com/mmgen/stylegan2/stylegan2_c2_ffhq_1024_b4x8_20210407_150045-618c9024.pth'
+d_reg_interval = 16
+g_reg_interval = 4
+g_reg_ratio = 0.8
+d_reg_ratio = 0.9411764705882353
+model = dict(
+    type='PSPTransfer',
+    src_generator=dict(
+        type='StyleGANv2Generator',
+        out_size=1024,
+        style_channels=512,
+        num_mlps=8,
+        pretrained=dict(
+            ckpt_path=
+            'https://download.openmmlab.com/mmgen/stylegan2/stylegan2_c2_ffhq_1024_b4x8_20210407_150045-618c9024.pth',
+            prefix='generator_ema')),
+    generator=dict(
+        type='SwapStyleGANv2Generator',
+        out_size=1024,
+        style_channels=512,
+        num_mlps=8,
+        pretrained=dict(
+            ckpt_path=
+            'https://download.openmmlab.com/mmgen/stylegan2/stylegan2_c2_ffhq_1024_b4x8_20210407_150045-618c9024.pth',
+            prefix='generator_ema')),
+    discriminator=dict(
+        type='ADAStyleGAN2Discriminator',
+        in_size=1024,
+        pretrained=dict(
+            ckpt_path=
+            'https://download.openmmlab.com/mmgen/stylegan2/stylegan2_c2_ffhq_1024_b4x8_20210407_150045-618c9024.pth',
+            prefix='discriminator'),
+        data_aug=dict(
+            type='ADAAug',
+            aug_pipeline=dict(
+                xflip=1,
+                rotate90=1,
+                xint=1,
+                scale=1,
+                rotate=1,
+                aniso=1,
+                xfrac=1,
+                brightness=1,
+                contrast=1,
+                lumaflip=1,
+                hue=1,
+                saturation=1))),
+    gan_loss=dict(type='GANLoss', gan_type='hinge'),
+    disc_auxiliary_loss=dict(
+        type='R1GradientPenalty',
+        loss_weight=80.0,
+        interval=16,
+        norm_mode='HWC',
+        data_info=dict(real_data='real_imgs', discriminator='disc')),
+    gen_auxiliary_loss=dict(
+        type='GeneratorPathRegularizer',
+        loss_weight=8.0,
+        pl_batch_shrink=2,
+        interval=4,
+        data_info=dict(generator='gen', num_batches='batch_size')),
+    lpips_lambda=0.5,
+    freezeD=5)
+train_cfg = dict(use_ema=True)
+test_cfg = None
+optimizer = dict(
+    generator=dict(type='Adam', lr=0.0016, betas=(0, 0.9919919678228657)),
+    discriminator=dict(
+        type='Adam', lr=0.0018823529411764706, betas=(0, 0.9905854573074332)))
+dataset_type = 'UnconditionalImageDataset'
+train_pipeline = [
+    dict(type='LoadImageFromFile', key='real_img', io_backend='disk'),
+    dict(type='Flip', keys=['real_img'], direction='horizontal'),
+    dict(
+        type='Normalize',
+        keys=['real_img'],
+        mean=[127.5, 127.5, 127.5],
+        std=[127.5, 127.5, 127.5],
+        to_rgb=False),
+    dict(type='ImageToTensor', keys=['real_img']),
+    dict(type='Collect', keys=['real_img'], meta_keys=['real_img_path'])
+]
+val_pipeline = [
+    dict(type='LoadImageFromFile', key='real_img', io_backend='disk'),
+    dict(
+        type='Normalize',
+        keys=['real_img'],
+        mean=[127.5, 127.5, 127.5],
+        std=[127.5, 127.5, 127.5],
+        to_rgb=True),
+    dict(type='ImageToTensor', keys=['real_img']),
+    dict(type='Collect', keys=['real_img'], meta_keys=['real_img_path'])
+]
+data = dict(
+    samples_per_gpu=2,
+    workers_per_gpu=2,
+    train=dict(
+        type='RepeatDataset',
+        times=100,
+        dataset=dict(
+            type='UnconditionalImageDataset',
+            imgs_root='data/images/10_Forest_Odds',
+            pipeline=[
+                dict(
+                    type='LoadImageFromFile',
+                    key='real_img',
+                    io_backend='disk'),
+                dict(type='Flip', keys=['real_img'], direction='horizontal'),
+                dict(
+                    type='Normalize',
+                    keys=['real_img'],
+                    mean=[127.5, 127.5, 127.5],
+                    std=[127.5, 127.5, 127.5],
+                    to_rgb=False),
+                dict(type='ImageToTensor', keys=['real_img']),
+                dict(
+                    type='Collect',
+                    keys=['real_img'],
+                    meta_keys=['real_img_path'])
+            ])),
+    val=dict(
+        type='UnconditionalImageDataset',
+        imgs_root='data/images/10_Forest_Odds',
+        pipeline=[
+            dict(type='LoadImageFromFile', key='real_img', io_backend='disk'),
+            dict(
+                type='Normalize',
+                keys=['real_img'],
+                mean=[127.5, 127.5, 127.5],
+                std=[127.5, 127.5, 127.5],
+                to_rgb=True),
+            dict(type='ImageToTensor', keys=['real_img']),
+            dict(
+                type='Collect', keys=['real_img'], meta_keys=['real_img_path'])
+        ]))
+checkpoint_config = dict(interval=100, by_epoch=False, max_keep_ckpts=100)
+log_config = dict(interval=100, hooks=[dict(type='TextLoggerHook')])
+custom_hooks = [
+    dict(
+        type='VisualizeUnconditionalSamples',
+        output_dir='training_samples',
+        interval=100),
+    dict(
+        type='ExponentialMovingAverageHook',
+        module_keys=('generator_ema', ),
+        interval=1,
+        start_iter=1,
+        interp_cfg=dict(momentum=0.999),
+        priority='VERY_HIGH')
+]
+runner = dict(
+    type='DynamicIterBasedRunner',
+    is_dynamic_ddp=False,
+    pass_training_status=True)
+dist_params = dict(backend='nccl')
+log_level = 'INFO'
+load_from = None
+resume_from = None
+workflow = [('train', 10000)]
+find_unused_parameters = True
+cudnn_benchmark = True
+imgs_root = 'data/images/10_Forest_Odds'
+aug_kwargs = dict(
+    xflip=1,
+    rotate90=1,
+    xint=1,
+    scale=1,
+    rotate=1,
+    aniso=1,
+    xfrac=1,
+    brightness=1,
+    contrast=1,
+    lumaflip=1,
+    hue=1,
+    saturation=1)
+lr_config = None
+total_iters = 60
+use_ddp_wrapper = True
+work_dir = './work_dirs/experiments/res/10_Forest_Odds'
+gpu_ids = range(2, 3)
+
+2022-11-24 23:20:53,677 - mmgen - INFO - Set random seed to 2021, deterministic: False
+cfg.train_cfg== {'use_ema': True}
+cfg.test_cfg== None
+load checkpoint from http path: https://download.openmmlab.com/mmgen/stylegan2/stylegan2_c2_ffhq_1024_b4x8_20210407_150045-618c9024.pth
+2022-11-24 23:20:54,451 - mmgen - INFO - Load pretrained model from https://download.openmmlab.com/mmgen/stylegan2/stylegan2_c2_ffhq_1024_b4x8_20210407_150045-618c9024.pth
+load checkpoint from http path: https://download.openmmlab.com/mmgen/stylegan2/stylegan2_c2_ffhq_1024_b4x8_20210407_150045-618c9024.pth
+2022-11-24 23:20:55,315 - mmgen - INFO - Load pretrained model from https://download.openmmlab.com/mmgen/stylegan2/stylegan2_c2_ffhq_1024_b4x8_20210407_150045-618c9024.pth
+load checkpoint from http path: https://download.openmmlab.com/mmgen/stylegan2/stylegan2_c2_ffhq_1024_b4x8_20210407_150045-618c9024.pth
+2022-11-24 23:20:56,094 - mmgen - INFO - Load pretrained model from https://download.openmmlab.com/mmgen/stylegan2/stylegan2_c2_ffhq_1024_b4x8_20210407_150045-618c9024.pth
+WARNING:torch.distributed.elastic.agent.server.api:Received 2 death signal, shutting down workers
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 11606 closing signal SIGINT
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 11606 closing signal SIGTERM
+Traceback (most recent call last):
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 709, in run
+    result = self._invoke_run(role)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 843, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 60, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 11587 got signal: 2
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/launch.py", line 193, in <module>
+    main()
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/launch.py", line 189, in main
+    launch(args)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/launch.py", line 174, in launch
+    run(args)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/run.py", line 710, in run
+    elastic_launch(
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 131, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 252, in launch_agent
+    result = agent.run()
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/elastic/metrics/api.py", line 125, in wrapper
+    result = f(*args, **kwargs)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 716, in run
+    self._shutdown(e.sigval)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/local_elastic_agent.py", line 190, in _shutdown
+    self._pcontext.close(death_sig)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 330, in close
+    self._close(death_sig=death_sig, timeout=timeout)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 720, in _close
+    handler.proc.wait(time_to_wait)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/subprocess.py", line 1189, in wait
+    return self._wait(timeout=timeout)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/subprocess.py", line 1911, in _wait
+    time.sleep(delay)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 60, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 11587 got signal: 2
+/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/launch.py:178: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/mmcv/__init__.py:20: UserWarning: On January 1, 2023, MMCV will release v2.0.0, in which it will remove components related to the training process and add a data transformation module. In addition, it will rename the package names mmcv to mmcv-lite and mmcv-full to mmcv. See https://github.com/open-mmlab/mmcv/blob/master/docs/en/compatibility.md for more details.
+  warnings.warn(
+Traceback (most recent call last):
+WARNING:torch.distributed.elastic.agent.server.api:Received 2 death signal, shutting down workers
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 12143 closing signal SIGINT
+
+Traceback (most recent call last):
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/launch.py", line 193, in <module>
+    main()
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/launch.py", line 189, in main
+    launch(args)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/launch.py", line 174, in launch
+    run(args)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/run.py", line 710, in run
+    elastic_launch(
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 131, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 252, in launch_agent
+    result = agent.run()
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/elastic/metrics/api.py", line 125, in wrapper
+    result = f(*args, **kwargs)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 709, in run
+    result = self._invoke_run(role)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 843, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/home/somebody/anaconda3/envs/pytorch1.10.0/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 60, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 12128 got signal: 2

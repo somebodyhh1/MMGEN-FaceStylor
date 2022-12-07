@@ -36,7 +36,6 @@ def parse_args():
     group_gpus.add_argument('--gpu-ids',
                             type=int,
                             nargs='+',
-                            default=[3],
                             help='ids of gpus to use '
                             '(only applicable to non-distributed training)')
     parser.add_argument('--seed', type=int, default=2021, help='random seed')
@@ -141,6 +140,7 @@ def main():
     model = build_model(cfg.model,
                         train_cfg=cfg.train_cfg,
                         test_cfg=cfg.test_cfg)
+    print('cfg.data.train==',cfg.data.train)
     datasets = [build_dataset(cfg.data.train)]
     if len(cfg.workflow) == 2:
         val_dataset = copy.deepcopy(cfg.data.val)

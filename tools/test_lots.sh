@@ -1,0 +1,23 @@
+#!bin/sh
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/10_Forest_Odds.py --save-path res/10_Forest_Odds;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/11_koala_kid.py --save-path res/11_koala_kid;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/12_snow_white.py --save-path res/12_snow_white;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/13_Brains.py --save-path res/13_Brains;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/14_Soul.py --save-path res/14_Soul;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/15_The_Croods.py --save-path res/15_The_Croods;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/16_The_House_of_Magic.py --save-path res/16_The_House_of_Magic;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/17_Turning_Red.py --save-path res/17_Turning_Red;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/18_Aya_and_the_Demon_Girl.py --save-path res/18_Aya_and_the_Demon_Girl;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/19_Dance_of_the_River.py --save-path res/19_Dance_of_the_River;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/1_Filisi.py --save-path res/1_Filisi;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/20_Delicacies_fall_from_the_sky.py --save-path res/20_Delicacies_fall_from_the_sky;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/21_Magic_filled_the_room.py --save-path res/21_Magic_filled_the_room;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/22_Peruvian_adventure.py --save-path res/22_Peruvian_adventure;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/2_Crazy_alien.py --save-path res/2_Crazy_alien;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/3_Frozen.py --save-path res/3_Frozen;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/4_Spirit_Hotel_2.py --save-path res/4_Spirit_Hotel_2;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/5_Spirit_Hotel_3.py --save-path res/5_Spirit_Hotel_3;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/7_A_godsend_opportunity.py --save-path res/7_A_godsend_opportunity;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/8_sunny_days.py --save-path res/8_sunny_days;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/9_Snowman.py --save-path res/9_Snowman;
+python demo/agilegan_demo_lots.py demo/src_img configs/test/generates/6_Nezhas_Devil_Child_Comes_to_Earth.py --save-path res/6_Nezhas_Devil_Child_Comes_to_Earth;

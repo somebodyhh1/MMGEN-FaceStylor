@@ -1,14 +1,14 @@
 _base_ = [
-    '../_base_/models/agile_transfer_256x256.py', '../_base_/datasets/unconditional_imgs_flip_256x256.py',
+    '../_base_/models/agile_transfer.py', '../_base_/datasets/ffhq_flip.py',
     '../_base_/default_runtime.py'
 ]
 
 # define dataset
 # you must set `samples_per_gpu`
 # `samples_per_gpu` and `imgs_root` need to be set.
-imgs_root = 'data/cartoon_compress'
-data = dict(samples_per_gpu=2,
-            workers_per_gpu=2,
+imgs_root = 'data/cartoon'
+data = dict(samples_per_gpu=4,
+            workers_per_gpu=4,
             train=dict(dataset=dict(imgs_root=imgs_root)),
             val=dict(imgs_root=imgs_root))
 

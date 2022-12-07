@@ -1,0 +1,3 @@
+/home/somebody/MMGEN-FaceStylor/demo/res/images/1_Filisi 140.95812125776695
+/home/somebody/MMGEN-FaceStylor/demo/res/images/frozen_70 frozen_70 145.4031600473903
+/home/somebody/MMGEN-FaceStylor/demo/res/images/1_Filisi_600 147.15189358940427

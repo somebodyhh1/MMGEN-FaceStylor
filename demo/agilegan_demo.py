@@ -14,7 +14,7 @@ from torchvision import utils
 sys.path.append(os.path.abspath(os.path.join(__file__, '../..')))  # isort:skip  # noqa
 import agilegan  # isort:skip  # noqa
 
-from mmgen.apis import init_model, sample_uncoditional_model  # isort:skip  # noqa
+from mmgen.apis import init_model  # isort:skip  # noqa
 
 
 def parse_args():

@@ -1,0 +1,23 @@
+#!bin/sh
+bash tools/dist_train.sh configs/test/configs/10_Forest_Odds.py 1 --work-dir ./work_dirs/experiments/res/10_Forest_Odds;
+bash tools/dist_train.sh configs/test/configs/11_koala_kid.py 1 --work-dir ./work_dirs/experiments/res/11_koala_kid;
+bash tools/dist_train.sh configs/test/configs/12_snow_white.py 1 --work-dir ./work_dirs/experiments/res/12_snow_white;
+bash tools/dist_train.sh configs/test/configs/13_Brains.py 1 --work-dir ./work_dirs/experiments/res/13_Brains;
+bash tools/dist_train.sh configs/test/configs/14_Soul.py 1 --work-dir ./work_dirs/experiments/res/14_Soul;
+bash tools/dist_train.sh configs/test/configs/15_The_Croods.py 1 --work-dir ./work_dirs/experiments/res/15_The_Croods;
+bash tools/dist_train.sh configs/test/configs/16_The_House_of_Magic.py 1 --work-dir ./work_dirs/experiments/res/16_The_House_of_Magic;
+bash tools/dist_train.sh configs/test/configs/17_Turning_Red.py 1 --work-dir ./work_dirs/experiments/res/17_Turning_Red;
+bash tools/dist_train.sh configs/test/configs/18_Aya_and_the_Demon_Girl.py 1 --work-dir ./work_dirs/experiments/res/18_Aya_and_the_Demon_Girl;
+bash tools/dist_train.sh configs/test/configs/19_Dance_of_the_River.py 1 --work-dir ./work_dirs/experiments/res/19_Dance_of_the_River;
+bash tools/dist_train.sh configs/test/configs/1_Filisi.py 1 --work-dir ./work_dirs/experiments/res/1_Filisi;
+bash tools/dist_train.sh configs/test/configs/20_Delicacies_fall_from_the_sky.py 1 --work-dir ./work_dirs/experiments/res/20_Delicacies_fall_from_the_sky;
+bash tools/dist_train.sh configs/test/configs/21_Magic_filled_the_room.py 1 --work-dir ./work_dirs/experiments/res/21_Magic_filled_the_room;
+bash tools/dist_train.sh configs/test/configs/22_Peruvian_adventure.py 1 --work-dir ./work_dirs/experiments/res/22_Peruvian_adventure;
+bash tools/dist_train.sh configs/test/configs/2_Crazy_alien.py 1 --work-dir ./work_dirs/experiments/res/2_Crazy_alien;
+bash tools/dist_train.sh configs/test/configs/3_Frozen.py 1 --work-dir ./work_dirs/experiments/res/3_Frozen;
+bash tools/dist_train.sh configs/test/configs/4_Spirit_Hotel_2.py 1 --work-dir ./work_dirs/experiments/res/4_Spirit_Hotel_2;
+bash tools/dist_train.sh configs/test/configs/5_Spirit_Hotel_3.py 1 --work-dir ./work_dirs/experiments/res/5_Spirit_Hotel_3;
+bash tools/dist_train.sh configs/test/configs/7_A_godsend_opportunity.py 1 --work-dir ./work_dirs/experiments/res/7_A_godsend_opportunity;
+bash tools/dist_train.sh configs/test/configs/8_sunny_days.py 1 --work-dir ./work_dirs/experiments/res/8_sunny_days;
+bash tools/dist_train.sh configs/test/configs/9_Snowman.py 1 --work-dir ./work_dirs/experiments/res/9_Snowman;
+bash tools/dist_train.sh configs/test/configs/6_Nezhas_Devil_Child_Comes_to_Earth.py 1 --work-dir ./work_dirs/experiments/res/6_Nezhas_Devil_Child_Comes_to_Earth;
